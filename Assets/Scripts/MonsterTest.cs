@@ -77,13 +77,13 @@ public class MonsterTest : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit Detected");
+        //Debug.Log("Hit Detected");
         if (other.tag == "Bullet")
         {
-            Debug.Log("아야!");
+            //Debug.Log("아야!");
         }
         if (other.tag == "Waypoints" && other.name == target.name) {
-            Debug.Log($"{waypointNum}번 포인트 도착");
+            //Debug.Log($"{waypointNum}번 포인트 도착");
             waypointNum++;
             target = waypoints[waypointNum];
         }

@@ -27,11 +27,11 @@ public class Tower : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            Debug.Log($"목표 : {other.gameObject.name}");
+            //Debug.Log($"목표 : {other.gameObject.name}");
             if (fireTime >= fireTimeLimit)
             {
                 bullet.GetComponent<Bullet>().target = other.gameObject;
-                Debug.Log("발사!");
+                //Debug.Log("발사!");
                 Instantiate(bullet, spawner.transform.position, spawner.transform.rotation);
                 fireTime = 0;
             }
