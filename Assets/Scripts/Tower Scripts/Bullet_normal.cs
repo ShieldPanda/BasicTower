@@ -9,7 +9,7 @@ public class Bullet_normal : Bullet
     // Start is called before the first frame update
     void Start()
     {
-        Bspeed = 6.0f;
+        Bspeed = 8.0f;
         sM.createSoundEffects("TowerFire");
         Destroy(gameObject, spantime);
         dir = (target.transform.position - this.transform.position).normalized;

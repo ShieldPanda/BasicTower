@@ -6,7 +6,6 @@ public class MonsterTest : MonoBehaviour
 {
     const int _MAX = 15;
     public float Mspeed = 1.0f;
-    private Rigidbody2D rb;
     private GameObject sManager;
     private SoundManager sM;
     private Vector3 dir;
@@ -63,9 +62,7 @@ public class MonsterTest : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (target == null) {
-            Destroy(gameObject);
-        }
+        
     }
 
     public int getEnemyHP() {
@@ -85,6 +82,10 @@ public class MonsterTest : MonoBehaviour
         if (other.tag == "Waypoints" && other.name == target.name) {
             //Debug.Log($"{waypointNum}번 포인트 도착");
             waypointNum++;
+            if (waypoints[waypointNum] == null)
+            {
+                Destroy(gameObject);
+            }
             target = waypoints[waypointNum];
         }
     }
