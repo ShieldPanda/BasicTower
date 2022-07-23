@@ -14,7 +14,7 @@ public class Bullet_homing : Bullet
     void FixedUpdate()
     {   
         dir = (target.transform.position - this.transform.position).normalized;
-        gameObject.transform.Translate(dir* Time.deltaTime * speed);
+        gameObject.transform.Translate(dir* Time.deltaTime * Bspeed);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

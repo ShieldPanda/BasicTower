@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterTest : MonoBehaviour
 {
     const int _MAX = 15;
-    public float speed = 1.0f;
+    public float Mspeed = 1.0f;
     private Rigidbody2D rb;
     private GameObject sManager;
     private SoundManager sM;
@@ -38,7 +38,7 @@ public class MonsterTest : MonoBehaviour
     void FixedUpdate()
     {
         dir = (target.transform.position - this.transform.position).normalized;
-        gameObject.transform.Translate(dir * Time.deltaTime * speed);
+        gameObject.transform.Translate(dir * Time.deltaTime * Mspeed);
 
         //if (Input.GetKey(KeyCode.A))
         //{

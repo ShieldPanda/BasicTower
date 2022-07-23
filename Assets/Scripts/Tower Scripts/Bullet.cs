@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     public GameObject target = null;
     protected float spantime = 4.0f;
     protected int dam = 20;
-    protected float speed = 2.0f;
+    protected float Bspeed = 2.0f;
     protected Vector3 dir;
     // Start is called before the first frame update
     void Awake()

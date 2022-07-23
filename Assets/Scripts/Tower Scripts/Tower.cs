@@ -32,8 +32,7 @@ public class Tower : MonoBehaviour
             {
                 bullet.GetComponent<Bullet>().target = other.gameObject;
                 Debug.Log("น฿ป็!");
-                Instantiate(bullet);
-                bullet.transform.position = spawner.transform.position;
+                Instantiate(bullet, spawner.transform.position, spawner.transform.rotation);
                 fireTime = 0;
             }
         }
