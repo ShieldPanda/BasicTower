@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6830271496994139519}
   - component: {fileID: 6830271496994139504}
   - component: {fileID: 6022778224806032852}
-  - component: {fileID: 6830271496994139516}
   - component: {fileID: 6926575568401525518}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bullet_homing
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -29,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6830271496994139505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0.834, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -118,27 +117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireSound: {fileID: 8300000, guid: 63d4c040dbe0c904ab37f4abc2da5ded, type: 3}
   target: {fileID: 0}
---- !u!50 &6830271496994139516
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6830271496994139505}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!82 &6926575568401525518
 AudioSource:
   m_ObjectHideFlags: 0

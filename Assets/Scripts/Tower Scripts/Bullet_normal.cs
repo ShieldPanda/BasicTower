@@ -5,23 +5,19 @@ using UnityEngine;
 //bullet을 상속받는 기본적인 탄
 public class Bullet_normal : Bullet
 {
-    float vx, vy;
+    
     // Start is called before the first frame update
     void Start()
     {
-        ad.Play();
-        speed = 3.0f;
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        Vector2 dir = (target.transform.position - this.transform.position).normalized;
-        vx = dir.x * speed;
-        vy = dir.y * speed;
+        speed = 6.0f;
+        sM.createSoundEffects("TowerFire");
+        Destroy(gameObject, spantime);
+        dir = (target.transform.position - this.transform.position).normalized;
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(vx, vy);
+        gameObject.transform.Translate(dir*Time.deltaTime*speed);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

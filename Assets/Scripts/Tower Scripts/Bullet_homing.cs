@@ -7,18 +7,14 @@ public class Bullet_homing : Bullet
 {
     void Start()
     {
-        ad.Play();
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        sM.createSoundEffects("TowerFire2");
+        Destroy(gameObject, spantime);
     }
 
     void FixedUpdate()
-    {
-        Vector2 dir = (target.transform.position - this.transform.position).normalized;
-        float vx = dir.x * speed;
-        float vy = dir.y * speed;
-        rb.velocity = new Vector2(vx, vy);
+    {   
+        dir = (target.transform.position - this.transform.position).normalized;
+        gameObject.transform.Translate(dir* Time.deltaTime * speed);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

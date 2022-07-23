@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     public enum bulletType { Bullet_normal, Bullet_homing }
     public bulletType btype;
     float fireTime = 0;
+    public float fireTimeLimit = 1.3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class Tower : MonoBehaviour
         if (other.tag == "Enemy")
         {
             Debug.Log($"목표 : {other.gameObject.name}");
-            if (fireTime >= 2)
+            if (fireTime >= fireTimeLimit)
             {
                 bullet.GetComponent<Bullet>().target = other.gameObject;
                 Debug.Log("발사!");
