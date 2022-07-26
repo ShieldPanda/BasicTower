@@ -17,7 +17,6 @@ public class MonsterTest : MonoBehaviour
     private int waypointNum = 0;
     private void Start()
     {
-        SoundManager.instance.createSoundEffects("");
         waypointGO = GameObject.Find("Waypoints");
         
         //°æ·Î Å½»ö

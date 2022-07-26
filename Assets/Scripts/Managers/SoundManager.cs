@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(_instance);
         }
         else
         {
