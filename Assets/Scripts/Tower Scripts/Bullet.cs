@@ -5,9 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public AudioClip fireSound;
-    private GameObject sManager;
     protected AudioSource ad;
-    protected SoundManager sM;
     public GameObject target = null;
     protected float spantime = 4.0f;
     protected int dam = 20;
@@ -16,8 +14,6 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        sManager = GameObject.Find("@SoundManager");
-        sM = sManager.GetComponent<SoundManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
