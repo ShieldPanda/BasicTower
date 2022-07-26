@@ -10,7 +10,7 @@ public class Bullet_normal : Bullet
     void Start()
     {
         Bspeed = 8.0f;
-        sM.createSoundEffects("TowerFire");
+        sM.createSoundEffects("TowerFire", 0.5f);
         Destroy(gameObject, spantime);
         dir = (target.transform.position - this.transform.position).normalized;
     }
@@ -25,7 +25,6 @@ public class Bullet_normal : Bullet
         {
             MonsterTest mon = other.GetComponent<MonsterTest>();
             mon.setEnemyHP(dam);
-            Debug.Log($"{dam}의 데미지를 주었다!");
             Destroy(gameObject);
         }
     }

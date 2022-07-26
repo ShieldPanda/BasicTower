@@ -6,12 +6,14 @@ public class MonsterTest : MonoBehaviour
 {
     const int _MAX = 15;
     public float Mspeed = 1.0f;
+    private int monsterHeart = 1;
+
     private GameObject sManager;
     private SoundManager sM;
     private Vector3 dir;
     public GameObject target;
-    // Update is called once per frame
-
+    private GameObject mapManager;
+    private MapManager mM;
     private int enemy_hp = 100;
     private GameObject waypointGO;
     private GameObject[] waypoints = new GameObject[_MAX];
@@ -21,6 +23,8 @@ public class MonsterTest : MonoBehaviour
         sManager = GameObject.Find("@SoundManager");
         sM = sManager.GetComponent<SoundManager>();
 
+        mapManager = GameObject.Find("@MapManager");
+        mM = mapManager.GetComponent<MapManager>();
         waypointGO = GameObject.Find("Waypoints");
         
         //경로 탐색
@@ -28,7 +32,7 @@ public class MonsterTest : MonoBehaviour
             waypoints[waypointNum] = child.gameObject;
             waypointNum++;
         }
-        Debug.Log("모든 경로 탐색 완료");
+        //Debug.Log("모든 경로 탐색 완료");
         gameObject.transform.position = waypoints[0].transform.position; //초기 위치 설정
         waypointNum = 1;
         target = waypoints[waypointNum];
@@ -56,13 +60,10 @@ public class MonsterTest : MonoBehaviour
         //}
 
         if (enemy_hp <= 0) {
-            
-            Debug.Log("으악!");
-            sM.createSoundEffects("EnemyDead");
+            //Debug.Log("으악!");
+            sM.createSoundEffects("EnemyDead", 0.7f);
             Destroy(gameObject);
         }
-
-        
     }
 
     public int getEnemyHP() {
@@ -74,16 +75,16 @@ public class MonsterTest : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Hit Detected");
         if (other.tag == "Bullet")
         {
             //Debug.Log("아야!");
         }
         if (other.tag == "Waypoints" && other.name == target.name) {
-            //Debug.Log($"{waypointNum}번 포인트 도착");
             waypointNum++;
             if (waypoints[waypointNum] == null)
             {
+                sM.createSoundEffects("gong-played1", 0.3f);
+                mM.setHeart(monsterHeart);
                 Destroy(gameObject);
             }
             target = waypoints[waypointNum];

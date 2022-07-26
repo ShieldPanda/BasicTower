@@ -14,7 +14,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         bullet =  Resources.Load<GameObject>($"Prefabs/{btype.ToString()}");
-        spawner = gameObject.transform.GetChild(0).gameObject;
+        spawner = transform.Find("tower_bulletSpawner").gameObject;
     }
 
     // Update is called once per frame

@@ -8,7 +8,8 @@ public class Bullet_homing : Bullet
     private Vector3 dir2;
     void Start()
     {
-        sM.createSoundEffects("TowerFire2");
+        Bspeed = 4.0f;
+        sM.createSoundEffects("TowerFire2", 0.4f);
         Destroy(gameObject, spantime);
     }
 
@@ -31,7 +32,6 @@ public class Bullet_homing : Bullet
         {
             MonsterTest mon = other.GetComponent<MonsterTest>();
             mon.setEnemyHP(dam);
-            Debug.Log($"{dam}의 데미지를 주었다!");
             Destroy(gameObject);
         }
     }
