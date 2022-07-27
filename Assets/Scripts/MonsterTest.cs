@@ -2,34 +2,24 @@ using UnityEngine;
 
 public class MonsterTest : MonoBehaviour
 {
-    const int _MAX = 15;
+    
     public float Mspeed = 1.0f;
     private int monsterHeart = 1;
 
     private Vector3 dir;
     public GameObject target;
     private int enemy_hp = 100;
-    //웨이포인트 매니저 만들어서 분리하기
-    private GameObject waypointGO;
-    private GameObject[] waypoints = new GameObject[_MAX];
-    private int waypointNum = 0;
+    private int nextWaypoint = 0;
+
     private void Start()
     {
-        waypointGO = GameObject.Find("Waypoints");
-        
-        //경로 탐색
-        foreach (Transform child in waypointGO.transform) {
-            waypoints[waypointNum] = child.gameObject;
-            waypointNum++;
-        }
-        //Debug.Log("모든 경로 탐색 완료");
-        gameObject.transform.position = waypoints[0].transform.position; //초기 위치 설정
-        waypointNum = 1;
-        target = waypoints[waypointNum];
-        
+        gameObject.transform.position = WaypointManager.instance.getStartPoint().transform.position;
+        target = WaypointManager.instance.getNextPoint(nextWaypoint);
     }
+
     void FixedUpdate()
     {
+        
         dir = (target.transform.position - this.transform.position).normalized;
         gameObject.transform.Translate(dir * Time.deltaTime * Mspeed);
 
@@ -70,14 +60,14 @@ public class MonsterTest : MonoBehaviour
             //Debug.Log("아야!");
         }
         if (other.tag == "Waypoints" && other.name == target.name) {
-            waypointNum++;
-            if (waypoints[waypointNum] == null)
+            nextWaypoint++;
+            if (WaypointManager.instance.getNextPoint(nextWaypoint) == null)
             {
                 SoundManager.instance.createSoundEffects("gong-played1", 0.3f);
                 MapManager.instance.setHeart(monsterHeart);
                 Destroy(gameObject);
             }
-            target = waypoints[waypointNum];
+            target = WaypointManager.instance.getNextPoint(nextWaypoint);
         }
     }
 }
