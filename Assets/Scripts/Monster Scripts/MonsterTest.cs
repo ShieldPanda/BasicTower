@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class MonsterTest : MonoBehaviour
 {
-    
-    public float Mspeed = 1.0f;
     private int monsterHeart = 1;
-
+    private int enemy_hp = 100;
+    public float Mspeed = 1.0f;
+    private int nextWaypoint = 0;
     private Vector3 dir;
     public GameObject target;
-    private int enemy_hp = 100;
-    private int nextWaypoint = 0;
 
     private void Start()
     {
@@ -17,33 +15,22 @@ public class MonsterTest : MonoBehaviour
         target = WaypointManager.instance.getNextPoint(nextWaypoint);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        
         dir = (target.transform.position - this.transform.position).normalized;
         gameObject.transform.Translate(dir * Time.deltaTime * Mspeed);
 
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    gameObject.transform.position += Vector3.left * Time.deltaTime;
-        //}
-        //if (Input.GetKey(KeyCode.D)) {
-        //    gameObject.transform.position += Vector3.right * Time.deltaTime;
-        //}
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    gameObject.transform.position += Vector3.up * Time.deltaTime;
-        //}
-        //if (Input.GetKey(KeyCode.S))
-        //{
-        //    gameObject.transform.position += Vector3.down * Time.deltaTime;
-        //}
-
         if (enemy_hp <= 0) {
-            //Debug.Log("으악!");
             SoundManager.instance.createSoundEffects("EnemyDead", 0.7f);
             Destroy(gameObject);
         }
+    }
+
+    // EnemyHP 프로퍼티
+    public int EnemyHP
+    {
+        get { return enemy_hp; }
+        //set { enemy_hp -= value; }
     }
 
     public int getEnemyHP() {
@@ -53,20 +40,20 @@ public class MonsterTest : MonoBehaviour
     public void setEnemyHP(int damage, int heal = 0) {
         enemy_hp = enemy_hp + heal - damage;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Bullet")
-        {
-            //Debug.Log("아야!");
-        }
         if (other.tag == "Waypoints" && other.name == target.name) {
+
             nextWaypoint++;
+
             if (WaypointManager.instance.getNextPoint(nextWaypoint) == null)
             {
                 SoundManager.instance.createSoundEffects("gong-played1", 0.3f);
                 MapManager.instance.setHeart(monsterHeart);
                 Destroy(gameObject);
             }
+
             target = WaypointManager.instance.getNextPoint(nextWaypoint);
         }
     }

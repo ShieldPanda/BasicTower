@@ -2,21 +2,26 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    GameObject bullet = null;
-    GameObject spawner = null;
-    public enum bulletType { Bullet_normal, Bullet_homing }
-    public bulletType btype;
-    float fireTime = 0;
+    public enum bulletType
+    {
+        Bullet_normal,
+        Bullet_homing
+
+    }
+
+    private float fireTime = 0;
     public float fireTimeLimit = 1.3f;
-    // Start is called before the first frame update
-    void Start()
+    public bulletType btype;
+    private GameObject bullet = null;
+    private GameObject spawner = null;
+
+    private void Start()
     {
         bullet =  Resources.Load<GameObject>($"Prefabs/{btype.ToString()}");
         spawner = transform.Find("tower_bulletSpawner").gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         fireTime += Time.deltaTime;
     }
@@ -28,8 +33,8 @@ public class Tower : MonoBehaviour
             //Debug.Log($"목표 : {other.gameObject.name}");
             if (fireTime >= fireTimeLimit)
             {
-                bullet.GetComponent<Bullet>().target = other.gameObject;
                 //Debug.Log("발사!");
+                bullet.GetComponent<Bullet>().target = other.gameObject;
                 Instantiate(bullet, spawner.transform.position, spawner.transform.rotation);
                 fireTime = 0;
             }
