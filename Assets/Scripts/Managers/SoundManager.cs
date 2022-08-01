@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     private GameObject SFXChannel;
     private GameObject musicChannel;
+
     private void Awake()
     {
         if (_instance == null)
@@ -21,12 +22,12 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
+
         musicChannel = gameObjectDDOL(musicChannel, "Music");
         SFXChannel = gameObjectDDOL(SFXChannel,"SFX");
         
         musicChannel.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sounds/Music/terran");
         musicChannel.GetComponent<AudioSource>().Play();
-
     }
 
     private GameObject gameObjectDDOL(GameObject IG, string Gname)
@@ -38,12 +39,16 @@ public class SoundManager : MonoBehaviour
             gameOb.name = Gname;
             gameOb.AddComponent<AudioSource>();
         }
+
         DontDestroyOnLoad(gameOb);
+
         return gameOb;
     }
 
     private AudioClip effect;
+
     public void createSoundEffects(string path, float volume = 1.0f) {
+
         //파일 경로를 받아서 SFX 채널 중 하나에서 파일을 재생하도록 함.
         effect = Resources.Load<AudioClip>($"Sounds/SFX/{path}");
         AudioSource SFX;

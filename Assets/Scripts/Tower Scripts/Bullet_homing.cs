@@ -4,14 +4,15 @@ using UnityEngine;
 public class Bullet_homing : Bullet
 {
     private Vector3 dir2;
-    void Start()
+
+    private void Start()
     {
         Bspeed = 4.0f;
         SoundManager.instance.createSoundEffects("TowerFire2", 0.4f);
         Destroy(gameObject, spantime);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (target == null)
         {
@@ -21,9 +22,11 @@ public class Bullet_homing : Bullet
         {
             dir = (target.transform.position - this.transform.position).normalized;
         }
+
         dir2 = dir;
-        gameObject.transform.Translate(dir* Time.deltaTime * Bspeed);
+        gameObject.transform.Translate(dir * Time.deltaTime * Bspeed);
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
