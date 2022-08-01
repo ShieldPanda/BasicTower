@@ -1,15 +1,21 @@
 using UnityEngine;
-using System;
-using System.Collections;
+using System.Collections.Generic;
+
 
 public class SoundManager : MonoBehaviour
 {
-    private const int SFX_max = 1;
+    [SerializeField]
+    SoundDictionary soundDict;
+    public IDictionary<string, AudioClip> SoundDictionary
+    {
+        get { return soundDict; }
+        set { soundDict.CopyFrom(value); }
+    }
+
     private static SoundManager _instance;
     public static SoundManager instance { get { return _instance; } }
 
-    private GameObject SFXChannel;
-    private GameObject musicChannel;
+    private AudioSource soundChannel;
 
     private void Awake()
     {
@@ -23,36 +29,20 @@ public class SoundManager : MonoBehaviour
             Destroy(this);
         }
 
-        musicChannel = gameObjectDDOL(musicChannel, "Music");
-        SFXChannel = gameObjectDDOL(SFXChannel,"SFX");
+        soundChannel = gameObject.GetComponent<AudioSource>();
         
-        musicChannel.GetComponent<AudioSource>().clip = Resources.Load<AudioClip>("Sounds/Music/terran");
-        musicChannel.GetComponent<AudioSource>().Play();
+        soundChannel.GetComponent<AudioSource>().clip = soundDict.GetValueOrDefault("BattleMusic");
+        soundChannel.GetComponent<AudioSource>().Play();
     }
 
-    private GameObject gameObjectDDOL(GameObject IG, string Gname)
-    {
-        GameObject gameOb = GameObject.Find(Gname);
-        if (gameOb == null)
-        {
-            gameOb = new GameObject();
-            gameOb.name = Gname;
-            gameOb.AddComponent<AudioSource>();
-        }
-
-        DontDestroyOnLoad(gameOb);
-
-        return gameOb;
-    }
 
     private AudioClip effect;
 
-    public void createSoundEffects(string path, float volume = 1.0f) {
-
+    public void createSoundEffects(string sfxname, float volume = 1.0f) {
         //파일 경로를 받아서 SFX 채널 중 하나에서 파일을 재생하도록 함.
-        effect = Resources.Load<AudioClip>($"Sounds/SFX/{path}");
-        AudioSource SFX;
-        SFX = SFXChannel.GetComponent<AudioSource>();
-        SFX.PlayOneShot(effect);
+        effect = soundDict.GetValueOrDefault(sfxname);
+        //볼륨 조절은 방법을 좀 찾아봐야 할듯
+        //https://www.youtube.com/watch?v=LfU5xotjbPw
+        soundChannel.PlayOneShot(effect);
     }
 }

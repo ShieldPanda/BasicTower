@@ -49,7 +49,7 @@ public class MonsterTest : MonoBehaviour
 
             if (WaypointManager.instance.getNextPoint(nextWaypoint) == null)
             {
-                SoundManager.instance.createSoundEffects("gong-played1", 0.3f);
+                SoundManager.instance.createSoundEffects("EnemyPassed", 0.3f);
                 MapManager.instance.setHeart(monsterHeart);
                 Destroy(gameObject);
             }
