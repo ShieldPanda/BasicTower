@@ -8,7 +8,6 @@ public class Bullet_homing : Bullet
     private void Start()
     {
         Bspeed = 4.0f;
-        SoundManager.instance.createSoundEffects("TowerFire2", 0.4f);
         Destroy(gameObject, spantime);
     }
 

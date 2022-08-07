@@ -6,7 +6,6 @@ public class Bullet_normal : Bullet
     private void Start()
     {
         Bspeed = 8.0f;
-        SoundManager.instance.createSoundEffects("TowerFire", 0.5f);
         Destroy(gameObject, spantime);
         dir = (target.transform.position - this.transform.position).normalized;
     }

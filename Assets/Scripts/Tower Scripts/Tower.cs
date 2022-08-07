@@ -17,9 +17,9 @@ public class Tower : MonoBehaviour
     private GameObject spawner = null;
     public bool isMulti = false;
 
-    private int multishotNum = 5;
-    private float multishot_angle = 15.0f;
-
+    [SerializeField] private int multishotNum = 5;
+    [SerializeField] private float multishot_angle = 15.0f;
+    [SerializeField] private float volume = 1.0f;
     private void Start()
     {
         bullet = Resources.Load<GameObject>($"Prefabs/{btype.ToString()}");
@@ -40,6 +40,7 @@ public class Tower : MonoBehaviour
             {
                 //Debug.Log("발사!");
                 bullet.GetComponent<Bullet>().target = other.gameObject;
+                fireSoundPlay(btype);
                 if (isMulti == true)
                 {
                     FireMultipleBullet(bullet, bullet.GetComponent<Bullet>().target);
@@ -83,6 +84,17 @@ public class Tower : MonoBehaviour
                 Debug.Log($"{i}번째 멀티샷 발사");
             }
             tempAngle = -tempAngle;
+        }
+    }
+
+    private void fireSoundPlay(bulletType _bulletType) {
+        switch (_bulletType) {
+            case bulletType.Bullet_normal:
+                SoundManager.instance.createSoundEffects("TowerFire", volume);
+                break;
+            case bulletType.Bullet_homing:
+                SoundManager.instance.createSoundEffects("TowerFire3", volume);
+                break;
         }
     }
 }
