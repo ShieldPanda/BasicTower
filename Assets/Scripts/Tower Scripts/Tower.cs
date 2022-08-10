@@ -6,6 +6,8 @@ public class Tower : MonoBehaviour
     {
         Bullet_normal,
         Bullet_homing,
+        Bullet_penetrating, // 관통탄
+        Bullet_fog, // 독탄
         Area_circle
     }
 
@@ -20,6 +22,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private int multishotNum = 5;
     [SerializeField] private float multishot_angle = 15.0f;
     [SerializeField] private float volume = 1.0f;
+
     private void Start()
     {
         bullet = Resources.Load<GameObject>($"Prefabs/{btype.ToString()}");
@@ -41,6 +44,7 @@ public class Tower : MonoBehaviour
                 //Debug.Log("발사!");
                 bullet.GetComponent<Bullet>().target = other.gameObject;
                 fireSoundPlay(btype);
+
                 if (isMulti == true)
                 {
                     FireMultipleBullet(bullet, bullet.GetComponent<Bullet>().target);
@@ -50,6 +54,7 @@ public class Tower : MonoBehaviour
                     FireBullet(bullet, bullet.GetComponent<Bullet>().target,0);
                     //Instantiate(bullet, spawner.transform.position, spawner.transform.rotation);
                 }
+                
                 fireTime = 0;
             }
         }
@@ -66,22 +71,23 @@ public class Tower : MonoBehaviour
     {
         int temp = 1;
         float tempAngle = multishot_angle;
+
         for (int i = 0; i < multishotNum; i++) {
             var projectileObject = Instantiate(_bullet, spawner.transform.position, spawner.transform.rotation);
             if (i == 0)
             {
                 projectileObject.transform.Rotate(new Vector3(0, 0, 0));
-                Debug.Log("초탄발사");
+                //Debug.Log("초탄발사");
             }
             else if (i % 2 == 0) {
                 projectileObject.transform.Rotate(new Vector3(0, 0, tempAngle*temp));
                 temp++;
-                Debug.Log($"{i}번째 멀티샷 발사");
+                //Debug.Log($"{i}번째 멀티샷 발사");
             }
             else
             {
                 projectileObject.transform.Rotate(new Vector3(0, 0, tempAngle*temp));
-                Debug.Log($"{i}번째 멀티샷 발사");
+                //Debug.Log($"{i}번째 멀티샷 발사");
             }
             tempAngle = -tempAngle;
         }

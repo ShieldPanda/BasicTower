@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaypointManager : MonoBehaviour
 {
-    private const int _MAX = 15;
+    private const int _MAX = 30;
 
     public static WaypointManager _instance;
 
@@ -41,6 +41,6 @@ public class WaypointManager : MonoBehaviour
         return waypoints[0]; 
     }
     public GameObject getNextPoint(int monsterPosition) {
-        return waypoints[monsterPosition+1];
+        return waypoints[monsterPosition + 1];
     }
 }
