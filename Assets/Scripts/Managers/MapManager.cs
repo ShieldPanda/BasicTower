@@ -6,7 +6,7 @@ public class MapManager : MonoBehaviour
     public static MapManager instance { get { return _instance; } }
 
     private int heart;
-    private int maxHeart = 2;
+    private int maxHeart = 3;
 
     // Start is called before the first frame update
     private void Start()

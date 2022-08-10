@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a165aa22cdf50e14aa1857a3a3ad8590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mspeed: 2
+  enemy_hp: 100
+  Mspeed: 7
   target: {fileID: 0}
 --- !u!50 &7024312204515134126
 Rigidbody2D:
@@ -244,7 +245,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.005766511, y: -0.06343201}

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MonsterTest : MonoBehaviour
 {
-    private int monsterHeart = 1;
     private int enemy_hp = 100;
+    private int monsterHeart = 1;
     public float Mspeed = 1.0f;
     private int nextWaypoint = 0;
     private Vector3 dir;
@@ -22,7 +22,9 @@ public class MonsterTest : MonoBehaviour
 
         if (enemy_hp <= 0) {
             SoundManager.instance.createSoundEffects("EnemyDead", 0.7f);
+            Debug.Log("몬스터가 사망합니다");
             Destroy(gameObject);
+            
         }
     }
 
